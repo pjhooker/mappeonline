@@ -36,14 +36,26 @@
 <?php /* INIZIO MODIFICA MARFECA94 */ ?>
 
  <div id="map"></div> <!-- this is the initial look of the map. in most cases it is done externally using something like a map.css stylesheet were you can specify the look of map elements, like background color tables and so on.-->
-<?php $geojson=get_field(geojson); 
-echo "$geojson"; 
+<?php 
+
+	// devi metterlo tra le virgolette 'geojson'
+	// ERROR $geojson=get_field(geojson); 
+	$geojson=get_field('geojson');
+	
+	//questo serve solo per stampare l'url, ma non serve in se per la mappa
+	echo "$geojson"; 
 ?> 
     <script src="leaflet/js/leaflet.js"></script> <!-- this is the javascript file that does the magic-->
 	<script src="leaflet/js/leaflet-hash.js"></script>
 	<script src="leaflet/js/label.js"></script>
 	<script src="leaflet/js/leaflet.markercluster.js"></script>
-    <script src=$geojson></script>
+    	
+    	// prima di tutto stai inserendo una variabile php all'interno della parte javascript
+    	// devi aprire e chiudere il php
+    	// e poi le virgolette
+    	// ERROR <script src=$geojson></script>
+    	<script src="<?php echo $geojson; ?>"></script>
+    	
 	<script>
 		var map = L.map('map', { zoomControl:true }).fitBounds([[41.8779771856,12.44973685],[41.8988958078,12.5038882279]]);
 		var hash = new L.Hash(map); //add hashes to html address to easy share locations
